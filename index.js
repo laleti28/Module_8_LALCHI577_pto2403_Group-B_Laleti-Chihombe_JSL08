@@ -1,6 +1,8 @@
 // This one will be a little tricky. So check out this overview first: https://www.youtube.com/watch?v=sJ-c3BA-Ypo
 
 // 1. Create a variable to store the singleton instance of the bank branch. "bankBranchInstance"
+let bankBranchInstance = null;
+
 
 // 2. Define a class called `BankBranch` for managing branch information.
 
@@ -9,13 +11,37 @@
 //    - Inside the constructor, check if the `bankBranchInstance` variable is null (indicating no instance exists).
 //    - If `bankBranchInstance` is null, create a new instance with the provided `branchInfo` and assign it to `bankBranchInstance`.
 //    - Return the `bankBranchInstance` whether it's newly created or existing.
+    class BankBranch {
+    constructor(branchInfo) {
+    if (!bankBranchInstance) {bankBranchInstance = this;
+        // Initialize branch information
+        this.branchInfo = branchInfo;
+      }
+      return bankBranchInstance;
+    }
+}
+  
+
 
 // 4. Add methods to the `BankBranch` class for managing branch-related information. For example, you can add a method like `getBranchInfo` to retrieve branch details.
+getBranchInfo() {
+    return this.branchInfo;
+  }
+
+
 
 // 5. In the usage section:
 //    - Create instances of the `BankBranch` class, such as `branchA` and `branchB`, with different branch information.
 //    - Use the `getBranchInfo` method to retrieve branch information from the instances.
 //    - Verify that `branchA` and `branchB` are both referring to the same instance by comparing them using `===`.
+
+let branchA = new BankBranch({ name: 'Branch A', location: 'kingston' });
+let branchB = new BankBranch({ name: 'Branch B', location: 'Los Angeles' });
+console.log(branchA.getBranchInfo()); // Output: { name: 'Branch A', location: 'Kingston' }
+console.log(branchB.getBranchInfo()); 
+console.log(branchA === branchB); 
+
+
 
 // This pseudo-code provides a step-by-step explanation of how to implement the Singleton Pattern for managing a single instance of the `BankBranch` class throughout the application, ensuring that multiple instances refer to the same object.
 
